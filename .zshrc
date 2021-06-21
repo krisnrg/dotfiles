@@ -14,7 +14,6 @@ alias la="ls -a"
 alias h="cd ~/"
 alias d="cd ~/Desktop"
 alias dev="cd /Users/kristiangonzalez/webdev"
-alias ga='git add -n "$(git status --short | awk '{print $2}' | fzf --multi)"'
 alias dot='/usr/bin/git --git-dir=/Users/kristiangonzalez/.dotfiles/ --work-tree=/Users/kristiangonzalez'
 
 # Set to this to use case-sensitive completion
@@ -38,7 +37,7 @@ alias dot='/usr/bin/git --git-dir=/Users/kristiangonzalez/.dotfiles/ --work-tree
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+#plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 POWERLEVEL9K_HOST_TEMPLATE="%n"
@@ -52,4 +51,33 @@ export PATH=/Users/nrg/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/loc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+function stage() {
+    #is_repo="$(git rev-parse --is-inside-work-tree 3>/dev/null)"
+    echo "Checking if this is a git working tree..."
+    
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        git add $(git status -s | awk '!/^A/{print}' | fzf -m --header "Modified files" --prompt="Select files to stage: " | awk '{print $2}')
+    else
+        echo "You need to be inside a git working tree"
+    fi
+}
 
+
+function reset() {
+    #is_repo="$(git rev-parse --is-inside-work-tree 3>/dev/null)"
+    echo "Retrieving files that can be reset..."
+    
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        git reset $(git status -s | awk '/A/{print}' | fzf -m --header "Staged files" --prompt="Select files to reset: " | awk '{print $3}')
+    else
+        echo "You need to be inside a git working tree"
+    fi
+}
+
+function gb(){
+  if [ $# -eq 0 ]; then
+    git branch | fzf --print0 -m | tr -d '[:space:]*' |xargs -0 -t -o git checkout
+  else
+    git checkout "$@"
+  fi
+}
