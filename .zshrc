@@ -8,41 +8,24 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias la="ls -a"
-alias h="cd ~/"
-alias d="cd ~/Desktop"
-alias dev="cd /Users/kristiangonzalez/webdev"
-alias dot='/usr/bin/git --git-dir=/Users/kristiangonzalez/.dotfiles/ --work-tree=/Users/kristiangonzalez'
+alias dev="cd ~/webdev"
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias vi=nvim
 
+# Not sure what this does, but I really need it
 stty erase "^?"
+
 # Bind key to dashboard
 #bindkey -s '^e' 'dashboard.sh^M'
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git)
+plugins=(git docker docker-compose fzf python tmux git-prompt)
 
 source $ZSH/oh-my-zsh.sh
 POWERLEVEL9K_HOST_TEMPLATE="%n"
