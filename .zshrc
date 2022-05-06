@@ -15,6 +15,11 @@ alias h="cd ~/"
 alias d="cd ~/Desktop"
 alias dev="cd /Users/kristiangonzalez/webdev"
 alias dot='/usr/bin/git --git-dir=/Users/kristiangonzalez/.dotfiles/ --work-tree=/Users/kristiangonzalez'
+alias vi=nvim
+
+stty erase "^?"
+# Bind key to dashboard
+#bindkey -s '^e' 'dashboard.sh^M'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -44,8 +49,8 @@ POWERLEVEL9K_HOST_TEMPLATE="%n"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs)
 
 # Customize to your needs...
-export PATH=/Users/nrg/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin:/usr/local/opt/emacs-mac/Emacs.app/Contents/MacOS/Emacs
-
+export PATH=~/.emacs.d/bin:/Users/nrg/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin:/usr/local/opt/emacs-mac/Emacs.app/Contents/MacOS/Emacs:$HOME/bin:$HOME/bin/nvim-osx64/bin/
+export PATH="/usr/bin:$PATH"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
