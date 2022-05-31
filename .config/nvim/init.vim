@@ -1,7 +1,12 @@
 :lua vim.opt.termguicolors = true
 
+
+
 "--- Load plugins
 :source ~/.config/nvim/setup/plugins.vim
+
+"---  Telescope setup
+:lua require('telescope-setup')
 
 "   __  __                   _                 
 "  |  \/  |                 (_)                
@@ -15,6 +20,11 @@
 "--- Set the leader key
 let mapleader=" "
 
+"--- Diff Options
+set diffopt=vertical,filler
+
+nmap <expr> <Up> &diff ? '[czz' : '<Up>'
+nmap <expr> <Down> &diff ? ']czz' : '<Down>'
 "--- Goyo
 nnoremap <leader>z :Goyo<cr>
 let g:goyo_width = 130
@@ -119,7 +129,7 @@ nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 noremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
-
+nnoremap <leader>ft :lua require'telescope-setup'.find_configs()<cr>
 "--- Use alt + hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -174,6 +184,13 @@ let g:dracula_colorterm = 1
 set updatetime=100
 filetype plugin on
 
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+          \ | wincmd p | diffthis
+endif
+
 "--- Easy moving between paragraphs but 
 "--- To the beging and end of lines
 "--- This will now also center your cursor as well
@@ -187,9 +204,7 @@ endfunction
 nnoremap <C-k> :call MoveParagraph('{', 'wzz')<CR>
 nnoremap <C-j> :call MoveParagraph('}', 'gezz')<CR>
 
-"--- Set up Telescope
-:lua require("telescope").setup()
-:lua require("telescope").load_extension "file_browser"
+":lua require("telescope").load_extension "file_browser"
 
 "--- Setup hop
 :lua require'hop'.setup()
@@ -247,15 +262,6 @@ endif
 syntax enable
 colorscheme dracula
 
-"https://draculatheme.com/contribute
-"green="#8aff80"
-"yellow="#ffff80"
-"pink="#ff80bf"
-"purple="#9580ff"
-"cyan="#80ffea"
-"orange="#ffca80"
-"red="#ff9580"
-
 "--- Set curserLine only on current window
 set cursorline
 
@@ -272,13 +278,14 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=700})
 augroup END
 
+
 " Colors in tmux
 if exists('$TMUX')
     let &t_8f = "<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-set termguicolors
+"set termguicolors
 let g:airline_theme='transparent'
 let g:airline#extensions#localsearch#enabled = 0
 "so $VIMRUNTIME/syntax/hitest.vim
@@ -310,3 +317,28 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+"https://draculatheme.com/contribute
+"green="#8aff80"
+"yellow="#ffff80"
+"pink="#ff80bf"
+"purple="#9580ff"
+"cyan="#80ffea"
+"orange="#ffca80"
+"red="#ff9580"
+
+"hi link TelescopeBorder DraculaBgDarker
+"link TelescopePromptBorder DraculaBgLight
+"Promp text and bg
+hi link TelescopePromptNormal DraculaBgLight
+hi link TelescopePromptCounter DraculaComment
+hi! TelescopeTitle guifg=#50FA7B term=bold,reverse ctermfg=117 gui=bold,reverse
+hi! link TelescopeResultsTitle DraculaOrange
+hi! link TelescopePreviewTitle DraculaTodo
+"hi link TelescopeNormal DraculaBgDark
+hi link TelescopeResultsNormal DraculaBgDark
+hi link TelescopePreviewNormal DraculaBgDark
+
+"hi link TelescopePromptBorder DraculaBgLight
+hi! TelescopePromptBorder guifg=#343746 guibg=#343746
+hi! TelescopeResultsBorder guifg=#21222C guibg=#21222C
+hi! TelescopePreviewBorder guifg=#21222C guibg=#21222C
