@@ -1,6 +1,6 @@
-:lua vim.opt.termguicolors = true
-
-
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 "--- Load plugins
 :source ~/.config/nvim/setup/plugins.vim
@@ -255,9 +255,6 @@ if has("nvim")
   au FileType fzf tunmap <Esc>
 endif
 
-if (has("termguicolors"))
- set termguicolors
-endif
 
 syntax enable
 colorscheme dracula
@@ -285,7 +282,6 @@ if exists('$TMUX')
     let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-"set termguicolors
 let g:airline_theme='transparent'
 let g:airline#extensions#localsearch#enabled = 0
 "so $VIMRUNTIME/syntax/hitest.vim
@@ -342,3 +338,9 @@ hi link TelescopePreviewNormal DraculaBgDark
 hi! TelescopePromptBorder guifg=#343746 guibg=#343746
 hi! TelescopeResultsBorder guifg=#21222C guibg=#21222C
 hi! TelescopePreviewBorder guifg=#21222C guibg=#21222C
+
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
