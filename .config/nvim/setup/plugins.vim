@@ -15,6 +15,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-file-browser.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'sheerun/vim-polyglot'
     Plug 'preservim/nerdcommenter'
     Plug 'neovim/nvim-lspconfig'
@@ -33,7 +34,6 @@ call plug#begin("~/.vim/plugged")
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'nvim-lua/lsp-status.nvim'
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'MattesGroeger/vim-bookmarks'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes' 

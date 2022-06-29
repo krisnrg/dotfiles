@@ -129,7 +129,7 @@ nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 noremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
-nnoremap <leader>ft :lua require'telescope-setup'.find_configs()<cr>
+nnoremap <C-p> :lua require'telescope-setup'.find_configs()<cr>
 "--- Use alt + hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j

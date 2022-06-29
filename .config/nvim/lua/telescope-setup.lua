@@ -38,6 +38,7 @@ require('telescope').setup({
         },
         -- other configuration values here
     })
+require("telescope").setup()
 require("telescope").load_extension "file_browser"
 
 local M = {}
@@ -75,13 +76,13 @@ M.colors = {
    folder_bg = "#7393b3",
 }
 function M.find_configs()
-  require("telescope.builtin").file_browser {
+  require('telescope').extensions.file_browser.file_browser {
     prompt_title = "Projects",
     results_title = " ",
     preview_title = "Preview",
     path_display = { "smart" },
     search_dirs = {
-      "/mnt/c/cms30/nodeServer/clients",
+      "/mnt/c/cms30/nodeServer/clients/",
     },
     layout_strategy = "horizontal",
     layout_config = { preview_width = 0.65, width = 0.75 },
