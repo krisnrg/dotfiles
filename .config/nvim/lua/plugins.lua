@@ -1,6 +1,5 @@
 return {
-	{ 'Mofiqul/dracula.nvim'},
-    	-- {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+	{ 'dracula/vim'},
 	{
 		'smoka7/hop.nvim',
 		version = "*",
