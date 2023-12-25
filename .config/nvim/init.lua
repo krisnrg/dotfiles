@@ -1,15 +1,4 @@
-vim.cmd([[
-    source $HOME/.config/nvim/settings.vim
-    source $HOME/.config/nvim/mappings.vim
-]])
-
-local function keymap(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
-end
+vim.opt.termguicolors = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -29,5 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Call Lazy
 require("lazy").setup('plugins')
 
--- Theme setup
-vim.cmd[[colorscheme dracula]]
+vim.cmd([[
+    source $HOME/.config/nvim/vim/settings.vim
+    source $HOME/.config/nvim/vim/mappings.vim
+]])
